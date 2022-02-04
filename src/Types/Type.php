@@ -12,6 +12,10 @@ abstract class Type {
 
 	abstract public function decode( ByteOperations $byteOperations, array $ansHeader ): void;
 
+	public function sanitizeInput( string $input ): string {
+		return $input;
+	}
+
 	public function getTypeId(): int {
 		return $this->typeId;
 	}

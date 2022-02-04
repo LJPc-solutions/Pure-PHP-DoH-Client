@@ -10,6 +10,7 @@ class DNS {
 	private static array $header = [];
 
 	public static function query( string $domainName, Type $type ): DNSQueryResult {
+		$domainName = $type->sanitizeInput($domainName);
 		$dnsQuery  = DNSRequest::create( $domainName, $type );
 		$rawAnswer = self::requestAnswer( $dnsQuery );
 
