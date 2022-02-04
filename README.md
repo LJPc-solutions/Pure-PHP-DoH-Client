@@ -6,7 +6,7 @@ This library finally makes it easy to query DNS records in PHP without any third
 
 ## Features
 
-- Automatically query multiple DoH servers (load balancing and backup when one of the servers is down)
+- Automatically query multiple DoH servers (round-robin)
 - Prefilled with CloudFlare, Google, Quad9 and AdGuard DoH servers
 - Easy to expand servers
 - Easy to expand resource records
@@ -153,5 +153,5 @@ Interested in a library or anything else? Please let us know via [info@ljpc.nl](
 
 ## Donations
 
-This module took us a lot of time, but we decided to make it open source anyway. If we helped you or your business, please consider donating.
+This library took a lot of time. If we helped you or your business, please consider donating.
 [Click here](https://www.buymeacoffee.com/Lars-) to donate.
