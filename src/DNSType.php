@@ -10,6 +10,7 @@ use LJPc\DoH\Types\DNAME;
 use LJPc\DoH\Types\DNSKEY;
 use LJPc\DoH\Types\DS;
 use LJPc\DoH\Types\KEY;
+use LJPc\DoH\Types\LOC;
 use LJPc\DoH\Types\MX;
 use LJPc\DoH\Types\NS;
 use LJPc\DoH\Types\NSEC;
@@ -31,6 +32,7 @@ use RuntimeException;
  * @method static MX MX()
  * @method static TXT TXT()
  * @method static AAAA AAAA()
+ * @method static LOC LOC()
  * @method static SRV SRV()
  * @method static DNAME DNAME()
  * @method static DS DS()
@@ -61,6 +63,7 @@ class DNSType {
 			'TXT'    => TXT::class,     // 16
 			'KEY'    => KEY::class,     // 25
 			'AAAA'   => AAAA::class,    // 28
+			'LOC'    => LOC::class,     // 29
 			'SRV'    => SRV::class,     // 33
 			'DNAME'  => DNAME::class,   // 39
 			'DS'     => DS::class,      // 43
