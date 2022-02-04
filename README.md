@@ -140,6 +140,13 @@ foreach ( $answers as $answer ) {
 This software is distributed under the [GPL 3.0](http://www.gnu.org/licenses/gpl-3.0.html) license, along with the [GPL Cooperation Commitment](https://gplcc.github.io/gplcc/). Please
 read [LICENSE](https://github.com/LJPc-solutions/Pure-PHP-DoH-Client/blob/master/LICENSE.md) for information on the software availability and distribution.
 
+## Inspiration
+
+This package is inspired by the following packages:
+- https://github.com/dcid/doh-php-client
+- https://github.com/mikepultz/netdns2
+- http://www.purplepixie.org/phpdns/
+
 ## Custom software
 
 Interested in a library or anything else? Please let us know via [info@ljpc.nl](mailto:info@ljpc.nl?subject=Pure%20PHP%20DoH%20Client) or [www.ljpc.solutions](https://ljpc.solutions).
