@@ -4,7 +4,7 @@ namespace LJPc\DoH\Types;
 
 use LJPc\DoH\ByteOperations;
 
-class LOC extends TextAnswerType {
+final class LOC extends TextAnswerType {
 	protected int $typeId = 29;
 	protected string $type = 'LOC';
 

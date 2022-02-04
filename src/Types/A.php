@@ -4,7 +4,7 @@ namespace LJPc\DoH\Types;
 
 use LJPc\DoH\ByteOperations;
 
-class A extends Type {
+final class A extends Type {
 	protected int $typeId = 1;
 	protected string $type = 'A';
 

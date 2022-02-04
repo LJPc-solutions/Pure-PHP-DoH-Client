@@ -5,7 +5,7 @@ namespace LJPc\DoH\Types;
 use LJPc\DoH\ByteOperations;
 use LJPc\DoH\DomainLabel;
 
-class SRV extends Type {
+final class SRV extends Type {
 	use DomainLabel;
 
 	protected int $typeId = 33;

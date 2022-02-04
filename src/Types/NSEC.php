@@ -7,7 +7,7 @@ use LJPc\DoH\DNSType;
 use LJPc\DoH\DomainLabel;
 use RuntimeException;
 
-class NSEC extends Type {
+final class NSEC extends Type {
 	use DomainLabel;
 
 	protected int $typeId = 47;

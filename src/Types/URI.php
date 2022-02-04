@@ -5,7 +5,7 @@ namespace LJPc\DoH\Types;
 use LJPc\DoH\ByteOperations;
 use LJPc\DoH\DomainLabel;
 
-class URI extends Type {
+final class URI extends Type {
 	use DomainLabel;
 
 	protected int $typeId = 256;

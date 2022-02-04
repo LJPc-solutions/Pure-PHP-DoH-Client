@@ -5,7 +5,7 @@ namespace LJPc\DoH\Types;
 use LJPc\DoH\ByteOperations;
 use LJPc\DoH\DomainLabel;
 
-class MX extends Type {
+final class MX extends Type {
 	use DomainLabel;
 
 	protected int $typeId = 15;

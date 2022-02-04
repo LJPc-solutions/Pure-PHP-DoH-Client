@@ -5,7 +5,7 @@ namespace LJPc\DoH\Types;
 use LJPc\DoH\ByteOperations;
 use LJPc\DoH\DomainLabel;
 
-class CAA extends Type {
+final class CAA extends Type {
 	use DomainLabel;
 
 	protected int $typeId = 257;

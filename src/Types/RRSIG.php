@@ -8,7 +8,7 @@ use LJPc\DoH\DNSType;
 use LJPc\DoH\DomainLabel;
 use RuntimeException;
 
-class RRSIG extends Type {
+final class RRSIG extends Type {
 	use DomainLabel;
 
 	protected int $typeId = 46;

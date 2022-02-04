@@ -5,7 +5,7 @@ namespace LJPc\DoH\Types;
 use LJPc\DoH\ByteOperations;
 use LJPc\DoH\DomainLabel;
 
-class SOA extends Type {
+final class SOA extends Type {
 	use DomainLabel;
 
 	protected int $typeId = 6;

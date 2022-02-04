@@ -2,7 +2,7 @@
 
 namespace LJPc\DoH\Types;
 
-class TXT extends TextAnswerType {
+final class TXT extends TextAnswerType {
 	protected int $typeId = 16;
 	protected string $type = 'TXT';
 }
