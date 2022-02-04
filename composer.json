@@ -1,10 +1,20 @@
 {
+  "name": "ljpc/pure-php-doh-client",
+  "description": "Easily query DNS records via HTTPS",
+  "type": "library",
   "autoload": {
     "psr-4": {
-      "LJPc\\DoH\\": "src"
+      "LJPc\\DoH\\": "src/"
     }
   },
+  "authors": [
+    {
+      "name": "LJPc solutions",
+      "email": "info@ljpc.nl"
+    }
+  ],
   "require": {
+    "php": "^8.0",
     "ext-curl": "*"
   }
 }
