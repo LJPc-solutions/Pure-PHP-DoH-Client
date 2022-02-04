@@ -21,6 +21,7 @@ use LJPc\DoH\Types\SPF;
 use LJPc\DoH\Types\SRV;
 use LJPc\DoH\Types\TXT;
 use LJPc\DoH\Types\Type;
+use LJPc\DoH\Types\URI;
 use RuntimeException;
 
 /**
@@ -40,6 +41,7 @@ use RuntimeException;
  * @method static NSEC NSEC()
  * @method static DNSKEY DNSKEY()
  * @method static SPF SPF()
+ * @method static URI URI()
  * @method static CAA CAA()
  */
 class DNSType {
@@ -71,6 +73,7 @@ class DNSType {
 			'NSEC'   => NSEC::class,    // 47
 			'DNSKEY' => DNSKEY::class,  // 48
 			'SPF'    => SPF::class,     // 99
+			'URI'    => URI::class,     // 256
 			'CAA'    => CAA::class,     // 257
 		];
 	}

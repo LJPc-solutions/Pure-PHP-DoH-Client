@@ -12,7 +12,7 @@ class MX extends Type {
 	protected string $type = 'MX';
 
 	public function decode( ByteOperations $byteOperations, array $ansHeader ): void {
-		$this->extras = unpack( "npreference", $byteOperations->getNextBytes( 2 ) );
+		$this->extras = unpack( "npriority", $byteOperations->getNextBytes( 2 ) );
 		$this->value  = $this->domainLabel( $byteOperations );
 	}
 }
