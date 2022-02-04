@@ -34,10 +34,10 @@ class DNS {
 		}
 	}
 
-	public static function query( string $domainName, Type $type ): DNSQueryResult {
+	public static function query( string $domainName, Type $type, string $useSpecificServer = null ): DNSQueryResult {
 		$domainName = $type->sanitizeInput( $domainName );
 		$dnsQuery   = DNSRequest::create( $domainName, $type );
-		[ $server, $rawAnswer ] = self::requestAnswer( $dnsQuery );
+		[ $server, $rawAnswer ] = self::requestAnswer( $dnsQuery, $useSpecificServer );
 
 		self::$byteOperations = new ByteOperations( $rawAnswer );
 
@@ -85,30 +85,38 @@ class DNS {
 		return $dnsQueryResults;
 	}
 
-	private static function requestAnswer( string $dnsQuery ): array {
-		$serverCount = count( self::$servers );
-		if ( $serverCount === 0 ) {
-			throw new RuntimeException( 'No DoH servers available, please set at least one server to continue' );
-		}
+	private static function requestAnswer( string $dnsQuery, string $specificServer = null ): array {
+		if ( $specificServer === null ) {
+			$serverCount = count( self::$servers );
+			if ( $serverCount === 0 ) {
+				throw new RuntimeException( 'No DoH servers available, please set at least one server to continue' );
+			}
 
-		$data         = null;
-		$triedServers = 0;
-		$useServer    = null;
-		while ( $data === null && $triedServers < $serverCount ) {
-			/** @var DoHServer $useServer */
-			$useServer = new self::$servers[ self::$queryCounter % $serverCount ];
-			if ( ! method_exists( $useServer, 'call' ) ) {
+			$data         = null;
+			$triedServers = 0;
+			$useServer    = null;
+			while ( $data === null && $triedServers < $serverCount ) {
+				/** @var DoHServer $useServer */
+				$useServer = new self::$servers[ self::$queryCounter % $serverCount ];
+				if ( ! method_exists( $useServer, 'call' ) ) {
+					self::$queryCounter ++;
+					$triedServers ++;
+					$useServer = new self::$servers[ self::$queryCounter % $serverCount ];
+				}
 				self::$queryCounter ++;
 				$triedServers ++;
-				$useServer = new self::$servers[ self::$queryCounter % $serverCount ];
-			}
-			self::$queryCounter ++;
-			$triedServers ++;
 
-			$data = $useServer->call( $dnsQuery );
-		}
-		if ( $data === null || $useServer === null ) {
-			throw new RuntimeException( 'No response from any server' );
+				$data = $useServer->call( $dnsQuery );
+			}
+			if ( $data === null || $useServer === null ) {
+				throw new RuntimeException( 'No response from any server' );
+			}
+		} else {
+			$useServer = new $specificServer;
+			$data      = $useServer->call( $dnsQuery );
+			if ( $data === null || $useServer === null ) {
+				throw new RuntimeException( 'No response from any server' );
+			}
 		}
 
 		return [ $useServer::class, $data ];
