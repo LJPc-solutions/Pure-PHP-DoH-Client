@@ -5,4 +5,5 @@ title: Pure PHP DoH Client
 description: Retrieve DNS records via DoH in PHP
 show_downloads: true
 github:
-  zip_url: https://github.com/LJPc-solutions/Pure-PHP-DoH-Client/archive/refs/heads/master.zip
+  zip_url: https://github.com/LJPc-solutions/Pure-PHP-DoH-Client/archive/refs/tags/1.0.0.zip
+  tar_url: https://github.com/LJPc-solutions/Pure-PHP-DoH-Client/archive/refs/tags/1.0.0.tar.gz
