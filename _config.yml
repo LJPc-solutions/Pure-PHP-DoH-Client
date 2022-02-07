@@ -1,1 +1,4 @@
 theme: jekyll-theme-minimal
+title: Pure PHP DoH Client
+description: Retrieve DNS records via DoH in PHP
+show_downloads: true
