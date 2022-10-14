@@ -34,7 +34,11 @@ class DNS {
 		}
 	}
 
-	public static function query( string $domainName, Type $type, string $useSpecificServer = null ): DNSQueryResult {
+	public static function query( string $domainName, Type $type, string $useSpecificServer = null, $queryRecursionCounter = 0 ): DNSQueryResult {
+		$queryRecursionCounter++;
+		if($queryRecursionCounter > 5) {
+			throw new RuntimeException('Too many recursions, something is wrong with the response from all nameservers');
+		}
 		$domainName = $type->sanitizeInput( $domainName );
 		$dnsQuery   = DNSRequest::create( $domainName, $type );
 		[ $server, $rawAnswer ] = self::requestAnswer( $dnsQuery, $useSpecificServer );
@@ -62,7 +66,9 @@ class DNS {
 		for ( $i = 0; $i < $answerAmount; $i ++ ) {
 			try {
 				$dnsQueryResults->addAnswer( new DNSRecord( self::$byteOperations ) );
-			} catch ( RuntimeException $e ) {
+			} catch ( DNSException $e ) {
+				//Rarely a nameservers returns invalid data
+				return self::query( $domainName, $type, $useSpecificServer, $queryRecursionCounter );
 			}
 		}
 
@@ -70,7 +76,9 @@ class DNS {
 		for ( $i = 0; $i < $authorityResultAmount; $i ++ ) {
 			try {
 				$dnsQueryResults->addAuthorityRecord( new DNSRecord( self::$byteOperations ) );
-			} catch ( RuntimeException $e ) {
+			} catch ( DNSException $e ) {
+				//Rarely a nameservers returns invalid data
+				return self::query( $domainName, $type, $useSpecificServer,$queryRecursionCounter );
 			}
 		}
 
@@ -78,7 +86,9 @@ class DNS {
 		for ( $i = 0; $i < $authorityResultAmount; $i ++ ) {
 			try {
 				$dnsQueryResults->addAuthorityRecord( new DNSRecord( self::$byteOperations ) );
-			} catch ( RuntimeException $e ) {
+			} catch ( DNSException $e ) {
+				//Rarely a nameservers returns invalid data
+				return self::query( $domainName, $type, $useSpecificServer,$queryRecursionCounter );
 			}
 		}
 
