@@ -6,9 +6,9 @@ use LJPc\DoH\ByteOperations;
 use LJPc\DoH\DomainLabel;
 
 class DomainAnswerType extends Type {
-	use DomainLabel;
+		use DomainLabel;
 
-	public function decode( ByteOperations $byteOperations, array $ansHeader ): void {
-		$this->value = $this->domainLabel( $byteOperations );
-	}
+		public function decode( ByteOperations $byteOperations, array $ansHeader ): void {
+				$this->value = $this->domainLabel( $byteOperations );
+		}
 }
