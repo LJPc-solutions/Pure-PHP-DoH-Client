@@ -36,6 +36,7 @@ The following resource records are available:
 - SRV
 - TXT
 - URI
+- TLSA
 
 ## Installation & loading
 
