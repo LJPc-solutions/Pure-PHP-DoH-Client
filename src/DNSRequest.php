@@ -43,6 +43,10 @@ class DNSRequest {
 		}
 
 		private static function encodeQuery( string $dnsQuery ): string {
-				return str_replace( "=", "", base64_encode( $dnsQuery ) );
+				return str_replace( "=", "", self::base64url_encode( $dnsQuery ) );
+		}
+
+		private static function base64url_encode( $data ): bool|string {
+				return rtrim( strtr( base64_encode( $data ), '+/', '-_' ), '=' );
 		}
 }
