@@ -2,8 +2,16 @@
 
 namespace LJPc\DoH\Servers;
 
+use InvalidArgumentException;
+
+
 abstract class DoHServer {
 		protected string $url = '';
+
+		/**
+		 * @var string[] $ips
+		 */
+		protected array $ips = [];
 
 		public function call( $dnsQuery ): ?string {
 				$ch = curl_init();
@@ -17,6 +25,20 @@ abstract class DoHServer {
 				curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 10 );
 				curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
 				curl_setopt( $ch, CURLOPT_HTTPHEADER, $headers );
+				if (count($this->ips) != 0) {
+					$parsed = parse_url($this->url, PHP_URL_HOST);
+					if ($parsed === false) {
+						throw new InvalidArgumentException( 'URL cannot parse' );
+					}
+					$resolved = $parsed . ":443:";
+					foreach ($this->ips as $key => $ip) {
+						if ($key != 0) {
+							$resolved = $resolved.",";
+						}
+						$resolved = $resolved.$ip;
+					}
+					curl_setopt($ch, CURLOPT_RESOLVE, [$resolved]);
+				}
 
 				$output = curl_exec( $ch );
 				if ( $output === false ) {
